@@ -1,9 +1,10 @@
 from os import name as os_name
 from platform import machine
+import sysconfig
 
 from setuptools import Extension, setup  # type: ignore
 
-if os_name != "nt":
+if os_name != "nt" or (os_name == "nt" and sysconfig.get_platform().startswith("mingw")):
     cflags = [
         "-std=c11",
         "-fvisibility=hidden",
